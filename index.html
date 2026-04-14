@@ -389,16 +389,18 @@
             const asiste = document.getElementById('asiste').value;
             
             // **CAMBIAR ESTE NÚMERO POR EL TUYO (CON CÓDIGO DE PAÍS)**
-            const numeroWhatsApp = "+5493886828855"; // Ej: 573001234567 (Colombia)
+            const numeroWhatsApp = "5493886828855"; // Ej: 573001234567 (Colombia)
             
             // MENSAJE PERSONALIZADO PARA WHATSAPP
-            const mensaje = `🎉 *NUEVA CONFIRMACIÓN DE ASISTENCIA* 🎉%0A%0A` +
-                          `✅ *Asistirá:* ${asiste}%0A` +
-                          `📱 Enviado desde la web de invitación%0A` +
-                          `✨ ¡Gracias por confirmar!`;
+            const mensaje = encodeURIComponent(
+                `🎉 *NUEVA CONFIRMACIÓN DE ASISTENCIA* 🎉
+                          ✅ *Asistirá:* ${asiste} 
+                          📱 Enviado desde la web de invitación%0A
+                          ✨ ¡Gracias por confirmar!`
+            );
             
             // URL DE WHATSAPP
-            const urlWhatsApp = `https://wa.me/5493886828855?text=${mensaje}`;
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensaje}`;
             
             // ABRIR WHATSAPP AUTOMÁTICAMENTE
             window.open(urlWhatsApp, '_blank');
