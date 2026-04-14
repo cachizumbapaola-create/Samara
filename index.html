@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- CONFIGURACIÓN BÁSICA -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños SAMARA! 🎉</title>
+    <style>
+        /* ESTILOS GENERALES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* VIDEO DE INVITACIÓN - SECCIÓN PRINCIPAL */
+        .video-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: slideDown 1s ease-out;
+        }
+
+        .video-section h1 {
+            font-size: 3em;
+            color: #e74c3c;
+            text-shadow: 3px 3px 0px #c0392b;
+            margin-bottom: 20px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 720px;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        #invitationVideo {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            /* CAMBIA LA ALTURA DEL VIDEO AQUÍ */
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .play-overlay:hover {
+            background: #c0392b;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* INFORMACIÓN DEL EVENTO */
+        .event-info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-item i {
+            font-size: 2.5em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* MAPA */
+        .map-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        #map {
+            height: 350px;
+            width: 100%;
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+
+        /* NUEVA SECCIÓN - IMAGEN CUMPLEAÑERA */
+        .cumpleanera-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .cumpleanera-image {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .cumpleanera-image:hover {
+            transform: scale(1.05);
+        }
+
+        /* FORMULARIO WHATSAPP */
+        .whatsapp-section {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+            text-align: center;
+        }
+
+        .whatsapp-section h2 {
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        .whatsapp-logo {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .rsvp-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .whatsapp-btn {
+            background: #fff;
+            color: #25D366;
+            border: none;
+            padding: 18px 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        /* CONFIRMACIÓN */
+        .whatsapp-confirmation {
+            display: none;
+            background: #27ae60;
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 20px;
+            animation: bounceIn 0.6s ease-out;
+            text-align: center;
+        }
+
+        .whatsapp-confirmation h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .whatsapp-confirmation p {
+            font-size: 1.1em;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .video-section h1 {
+                font-size: 2.2em;
+            }
+            #invitationVideo {
+                height: 300px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ANIMACIONES */
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* EMOJIS FLOTANTES */
+        .emoji-float {
+            position: fixed;
+            font-size: 3em;
+            animation: float 4s ease-in-out infinite;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .emoji1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .emoji2 { top: 20%; right: 8%; animation-delay: 1s; }
+        .emoji3 { bottom: 15%; left: 10%; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- EMOJIS DECORATIVOS -->
+    <div class="emoji-float emoji1">🎉</div>
+    <div class="emoji-float emoji2">🎂</div>
+    <div class="emoji-float emoji3">🎈</div>
+
+    <div class="container">
+        <!-- 🎥 VIDEO DE INVITACIÓN - SUBE TU VIDEO AQUÍ -->
+        <div class="video-section">
+            <h1>¡Tu Invitación Especial! 🎊</h1>
+            <div class="video-container">
+                <!-- CAMBIA LA RUTA DEL VIDEO POR LA TUYA -->
+                <video id="invitationVideo" controls autoplay muted playsinline
+                poster="https://drive.google.com/uc?export=download&id=1ABC123XYZ">
+                    <source src="invitacionvideo.mp4" type="video/mp4">
+                    <!-- SUBE TU VIDEO A LA MISMA CARPETA O CAMBIA LA URL -->
+                    Tu navegador no soporta video HTML5.
+                </video>
+                <div class="play-overlay" onclick="document.getElementById('invitationVideo').play()">
+                    ▶️ REPRODUCIR
+                </div>
+            </div>
+        </div>
+
+        <!-- 📅 INFORMACIÓN DEL EVENTO -->
+        <div class="event-info">
+            <h2 style="text-align: center; margin-bottom: 25px; color: #2c3e50;">📋 Detalles Importantes</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <i>📅</i>
+                    <h3>Fecha</h3>
+                    <p><strong>3 de Mayo 2026</strong></p>
+                </div>
+                <div class="info-item">
+                    <i>🕕</i>
+                    <h3>Hora</h3>
+                    <p><strong>5:00 PM A 8:00 PM</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 📍 MAPA -->
+       <div class="map-section">
+    <h2 style="margin-bottom: 20px; color: #2c3e50;">📍 Lugar de la Fiesta</h2>
+    <p style="font-size: 1.3em; margin-bottom: 15px;">
+        <strong>🏠 Salon "Juan De Los Palotes"</strong><br>
+        <span style="font-size: 1.1em;">Dirección exacta en el mapa</span>
+    </p>
+    
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!4v1776119721881!6m8!1m7!1s9MPXlkJAwogeZ0C0MT1mZQ!2m2!1d-24.17949277203371!2d-65.28706495848182!3f132.05794!4f0!5f0.7820865974627469" 
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+       
+    </iframe>
+</div>
+ <!-- 🆕 IMAGEN CUMPLEAÑERA - ABAJO DEL MAPA -->
+        <div class="cumpleanera-section">
+            <h2 class="section-title" style="color: #e74c3c;">👑 La Cumpleañera</h2>
+           <img src="samara.jpeg" alt="Decoración de cumpleaños" width="300">
+            <h3 style="margin-top: 20px; color: #e74c3c;">¡Samara cumple años! 🎂✨</h3>
+        </div>
+        <!-- 📱 WHATSAPP CONFIRMACIÓN -->
+        <div class="whatsapp-section">
+            <div class="whatsapp-logo">📱</div>
+            <h2>✅ Confirma tu asistencia por WhatsApp</h2>
+            
+            <form class="rsvp-form" id="whatsappForm">    
+                <div class="form-group">
+                    <label>🎯 ¿Asistirás?</label>
+                    <select id="asiste" required>
+                        <option value="">Selecciona...</option>
+                        <option value="SÍ">¡SÍ asistiré! 🎉</option>
+                        <option value="NO">No podré asistir 😔</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="whatsapp-btn">
+                    📲 Enviar Confirmación a WhatsApp
+                </button>
+            </form>
+
+            <!-- MENSAJE DE CONFIRMACIÓN -->
+            <div class="whatsapp-confirmation" id="whatsappConfirm">
+                <h3>✅ ¡Confirmación Enviada! 🎉</h3>
+                <p>Se ha enviado tu confirmación automáticamente a WhatsApp.<br>
+                ¡Nos vemos en la fiesta! ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT PARA WHATSAPP -->
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // OBTENER DATOS
+            const nombre = document.getElementById('nombre').value;
+            const asiste = document.getElementById('asiste').value;
+            
+            // **CAMBIAR ESTE NÚMERO POR EL TUYO (CON CÓDIGO DE PAÍS)**
+            const numeroWhatsApp = "+54 9 3886828855"; // Ej: 573001234567 (Colombia)
+            
+            // MENSAJE PERSONALIZADO PARA WHATSAPP
+            const mensaje = `🎉 *NUEVA CONFIRMACIÓN DE ASISTENCIA* 🎉%0A%0A` +
+                          `✅ *Asistirá:* ${asiste}%0A` +
+                          `📱 Enviado desde la web de invitación%0A` +
+                          `✨ ¡Gracias por confirmar!`;
+            
+            // URL DE WHATSAPP
+            const urlWhatsApp = `https://wa.me/3886828855?text=${mensaje}`;
+            
+            // ABRIR WHATSAPP AUTOMÁTICAMENTE
+            window.open(urlWhatsApp, '_blank');
+            
+            // MOSTRAR CONFIRMACIÓN Y OCULTAR FORMULARIO
+            document.getElementById('whatsappConfirm').style.display = 'block';
+            this.style.display = 'none';
+            
+            // EFECTO DE CELEBRACIÓN
+            celebrationEffect();
+        });
+
+        // 🎊 EFECTO DE CONFETI
+        function celebrationEffect() {
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createConfetti();
+                }, i * 50);
+            }
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.innerHTML = ['🎉','🎊','✨','🎈','🎂'][Math.floor(Math.random()*5)];
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-10px';
+            confetti.style.fontSize = '2em';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.animation = 'float 3s linear forwards';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 3000);
+        }
+
+        // EFECTOS VISUALES EN FORMULARIO
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+            });
+            input.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // AUTO-REPRODUCIR VIDEO (OPCIONAL)
+        document.getElementById('invitationVideo').addEventListener('loadeddata', function() {
+            this.play().catch(e => console.log('Autoplay bloqueado'));
+        });
+    </script>
+</body>
+</html>
